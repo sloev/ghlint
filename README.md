@@ -4,7 +4,7 @@ Check the health of GitHub repositories.
 
 # Getting Started
 
-Update the [`repohealth.cfg`](repohealth.cfg) with your GitHub username and [access token](https://github.com/settings/tokens).
+Update [`config.py`](config.py) with your GitHub username and [access token](https://github.com/settings/tokens) or set the environment variables.
 
 ```sh
 pip install -r requirements.txt
