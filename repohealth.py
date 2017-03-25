@@ -6,3 +6,6 @@ GITHUB = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
 
 for repo in GITHUB.get_user().get_repos():
     print repo.name
+    branches = repo.get_branches()
+    for branch in branches:
+        print "+ " + branch.name
