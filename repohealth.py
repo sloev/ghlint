@@ -1,10 +1,8 @@
-import ConfigParser
+"""Basic console implementation"""
+import config
 from github import Github
 
-config = ConfigParser.RawConfigParser()
-config.read("repohealth.cfg")
+GITHUB = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
 
-github = Github(config.get("GITHUB", "user"), config.get("GITHUB", "password"))
-
-for repo in github.get_user().get_repos():
+for repo in GITHUB.get_user().get_repos():
     print repo.name
