@@ -1,5 +1,5 @@
 """Basic console implementation"""
-import datetime
+from datetime import datetime
 import config
 from github import Github
 from termcolor import cprint
@@ -16,6 +16,6 @@ for repo in GITHUB.get_user().get_repos():
     pulls = repo.get_pulls()
     for pr in pulls:
         print "* " + pr.head.label[11:]
-        pr_age = datetime.datetime.now()-pr.created_at
+        pr_age = datetime.now() - pr.created_at
         if pr_age.days >= 7: # old pull requests
             cprint(repo.name + " " + pr.head.label[11:], "yellow")
