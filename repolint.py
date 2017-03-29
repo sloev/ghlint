@@ -22,11 +22,11 @@ def repolint(repo):
                 cprint("No .editorconfig", "yellow")
 
     pulls = repo.get_pulls()
-    for pr in pulls:
-        print "* " + pr.head.label[11:]
-        pr_age = datetime.now() - pr.created_at
+    for pull in pulls:
+        print "* " + pull.head.label[11:]
+        pr_age = datetime.now() - pull.created_at
         if pr_age.days >= 7: # old pull requests
-            cprint(repo.name + " " + pr.head.label[11:], "yellow")
+            cprint(repo.name + " " + pull.head.label[11:], "yellow")
 
 # # active branches
 # - merged
