@@ -8,13 +8,18 @@ def repolint(repo):
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == "master":
-            for file in repo.get_dir_contents("/"):
-                print file
-                # check for
-                # - README
-                # - LICENSE
-                # - .gitignore
-                # - .editorconfig
+            has_editorconfig = False
+            for file_in_root in repo.get_dir_contents("/"):
+                if file_in_root.path == ".editorconfig":
+                    has_editorconfig = True
+                if file_in_root.path == ".gitignore":
+                    has_gitignore = True
+                if file_in_root.path == "LICENSE":
+                    has_license = True
+                if file_in_root.path == "README":
+                    has_readme = True
+            if has_editorconfig != True:
+                cprint("No .editorconfig", "yellow")
 
     pulls = repo.get_pulls()
     for pr in pulls:
