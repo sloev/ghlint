@@ -14,7 +14,7 @@ def repolint(repo):
                     has_editorconfig = True
                 if file_in_root.path == ".gitignore":
                     has_gitignore = True
-                if file_in_root.path == "LICENSE":
+                if file_in_root.path == "LICENSE": # LICENSE.txt (or LICENSE.md
                     has_license = True
                 if file_in_root.path == "README":
                     has_readme = True
@@ -38,6 +38,8 @@ def repolint(repo):
 # - proportion open:closed pull requests
 # # open issues
 # - proportion open:closed issues
+# license detection
+# - https://developer.github.com/v3/licenses/#get-a-repositorys-license
 # CI
 # Node.js
 # - npm
