@@ -1,6 +1,5 @@
 """Repository linter"""
 from datetime import datetime
-from termcolor import cprint
 
 def repolint(repo):
     print repo.name
@@ -19,14 +18,14 @@ def repolint(repo):
                 if file_in_root.path == "README":
                     has_readme = True
             if has_editorconfig != True:
-                cprint("No .editorconfig", "yellow")
+                print "No .editorconfig"
 
     pulls = repo.get_pulls()
     for pull in pulls:
         print "* " + pull.head.label[11:]
         pr_age = datetime.now() - pull.created_at
         if pr_age.days >= 7: # old pull requests
-            cprint(repo.name + " " + pull.head.label[11:], "yellow")
+            print repo.name + " " + pull.head.label[11:]
 
 # # active branches
 # - merged
