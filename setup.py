@@ -10,7 +10,7 @@ with open('LICENSE') as f:
 setup(
     name='ghlint',
     version='0.1.0',
-    description='foo',
+    description='Linting utility for GitHub',
     long_description=README,
     author='Martin Buberl',
     author_email='hello@martinbuberl.com',
