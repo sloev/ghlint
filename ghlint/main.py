@@ -9,9 +9,9 @@ def lint():
     print ghlintr["RULES"]
     print ghlintr["RULES"]["editorconfig"]
 
-    GITHUB = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
+    github = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
 
-    for repo in GITHUB.get_user().get_repos():
+    for repo in github.get_user().get_repos():
         repolint.repolint(repo)
 
 if __name__ == "__main__":
