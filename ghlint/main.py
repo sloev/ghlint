@@ -2,6 +2,7 @@ import config
 import repolint
 from github import Github
 
+
 def lint():
     GITHUB = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
 

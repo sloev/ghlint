@@ -1,5 +1,5 @@
-"""Repository linter"""
 from datetime import datetime
+
 
 def repolint(repo):
     print repo.name
