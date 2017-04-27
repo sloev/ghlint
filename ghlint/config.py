@@ -1,4 +1,5 @@
 import os
+import configparser
 
 
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME") or "YOUR_GITHUB_USERNAME"
@@ -13,3 +14,9 @@ def find_ghlintrc():
     return ghlintrc
 
 GHLINTRC = find_ghlintrc()
+
+def read_ghlintrc():
+    config = configparser.ConfigParser()
+    config.read(GHLINTRC)
+
+    return config
