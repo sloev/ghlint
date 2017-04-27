@@ -1,0 +1,10 @@
+# Configuring Rules
+# rulename=off|warn|error
+
+[RULES]
+
+# Repository has a .editorconfig file in the root
+editorconfig=warn
+
+# Repository has a .gitignore file in the root
+gitignore=warn
