@@ -1,6 +1,5 @@
-"""Basic console implementation"""
-from . import config
-from . import repolint
+import config
+import repolint
 from github import Github
 
 def lint():
@@ -8,3 +7,6 @@ def lint():
 
     for repo in GITHUB.get_user().get_repos():
         repolint.repolint(repo)
+
+if __name__ == "__main__":
+    lint()
