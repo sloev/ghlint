@@ -11,4 +11,4 @@ Update ``config.py`` with your GitHub username and `access token <https://github
 .. code-block:: sh
 
     pip install -r requirements.txt
-    python repohealth.py
+    python ghlint/main.py
