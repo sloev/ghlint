@@ -13,10 +13,8 @@ def find_ghlintrc():
 
     return ghlintrc
 
-GHLINTRC = find_ghlintrc()
-
 def read_ghlintrc():
     config = configparser.ConfigParser()
-    config.read(GHLINTRC)
+    config.read(find_ghlintrc())
 
     return config
