@@ -26,12 +26,10 @@ def lint(repo):
                     has_editorconfig = True
                 if file_in_root.path == ".gitignore":
                     has_gitignore = True
-                if file_in_root.path == "LICENSE": # LICENSE.txt (or LICENSE.md
-                    has_license = True
-                if file_in_root.path == "README":
-                    has_readme = True
             if has_editorconfig != True:
                 print "No .editorconfig"
+            if has_gitignore != True:
+                print "No .gitignore"
 
     pulls = repo.get_pulls()
     for pull in pulls:
