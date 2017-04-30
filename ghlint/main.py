@@ -3,7 +3,7 @@ from datetime import datetime
 from github import Github
 
 
-def lint():
+def main():
     ghlintr = config.read_ghlintrc()
     print ghlintr.sections()
     print ghlintr["RULES"]
@@ -12,9 +12,9 @@ def lint():
     github = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
 
     for repo in github.get_user().get_repos():
-        repolint.repolint(repo)
+        lint(repo)
 
-def repolint(repo):
+def lint(repo):
     print repo.name
 
     branches = repo.get_branches()
@@ -42,4 +42,4 @@ def repolint(repo):
 
 
 if __name__ == "__main__":
-    lint()
+    main()
