@@ -16,5 +16,5 @@ setup(
     author_email='hello@martinbuberl.com',
     url='https://github.com/martinbuberl/ghlint',
     license=LICENSE,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests'))
 )
