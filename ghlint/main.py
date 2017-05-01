@@ -9,18 +9,18 @@ GITHUB_PASSWORD = os.getenv("GITHUB_PASSWORD")
 
 
 def main():
-    ghlintr = read_ghlintrc()
+    ghlintrc = read_ghlintrc()
+    github = Github(GITHUB_USERNAME, GITHUB_PASSWORD)
+
+    repo_type = "owner"
+    for repo in github.get_user().get_repos(repo_type):
+        lint(repo, ghlintrc)
+
+def lint(repo, ghlintr):
+    print repo
     print ghlintr.sections()
     print ghlintr["RULES"]
     print ghlintr["RULES"]["editorconfig"]
-
-    github = Github(GITHUB_USERNAME, GITHUB_PASSWORD)
-
-    for repo in github.get_user().get_repos():
-        lint(repo)
-
-def lint(repo):
-    print repo.name
 
     branches = repo.get_branches()
     for branch in branches:
