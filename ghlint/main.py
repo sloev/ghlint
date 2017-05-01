@@ -1,15 +1,20 @@
-import config
 from datetime import datetime
+import configparser
+import os
 from github import Github
 
 
+GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
+GITHUB_PASSWORD = os.getenv("GITHUB_PASSWORD")
+
+
 def main():
-    ghlintr = config.read_ghlintrc()
+    ghlintr = read_ghlintrc()
     print ghlintr.sections()
     print ghlintr["RULES"]
     print ghlintr["RULES"]["editorconfig"]
 
-    github = Github(config.GITHUB_USERNAME, config.GITHUB_PASSWORD)
+    github = Github(GITHUB_USERNAME, GITHUB_PASSWORD)
 
     for repo in github.get_user().get_repos():
         lint(repo)
@@ -37,6 +42,20 @@ def lint(repo):
         pr_age = datetime.now() - pull.created_at
         if pr_age.days >= 7: # old pull requests
             print repo.name + " " + pull.head.label[11:]
+
+def find_ghlintrc():
+    ghlintrc = None
+
+    if os.path.exists(".ghlintrc"):
+        ghlintrc = os.path.abspath(".ghlintrc")
+
+    return ghlintrc
+
+def read_ghlintrc():
+    config = configparser.ConfigParser()
+    config.read(find_ghlintrc())
+
+    return config
 
 
 if __name__ == "__main__":
