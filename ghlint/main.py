@@ -2,6 +2,7 @@ from datetime import datetime
 import configparser
 import os
 from github import Github
+from termcolor import colored, cprint
 
 
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
@@ -14,23 +15,31 @@ def main():
 
     repo_type = "owner"
     for repo in github.get_user().get_repos(repo_type):
-        lint(repo, ghlintrc)
+        if repo.fork is False:
+            lint(repo, ghlintrc)
 
 def lint(repo, ghlintr):
-    print repo
-    print ghlintr.sections()
-    print ghlintr["RULES"]
-    print ghlintr["RULES"]["editorconfig"]
+    cprint(repo.name + " (", "white", end="")
+    if repo.private is True:
+        cprint("Private", "red", end="")
+    else:
+        cprint("Public", "green", end="")
+    cprint(")", "white")
+
+    #print ghlintr.sections()
 
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == "master":
             has_editorconfig = False
+            has_gitignore = False
+
             for file_in_root in repo.get_dir_contents("/"):
                 if file_in_root.path == ".editorconfig":
                     has_editorconfig = True
                 if file_in_root.path == ".gitignore":
                     has_gitignore = True
+
             if has_editorconfig != True:
                 print "No .editorconfig"
             if has_gitignore != True:
