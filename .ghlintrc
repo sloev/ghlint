@@ -1,13 +1,20 @@
 # Configuring Rules
 # rulename=off|warn|error
 
-[RULES]
+[ALL]
 
 # Repository has a .editorconfig file in the root
 editorconfig=warn
 
 # Repository has a .gitignore file in the root
 gitignore=warn
+
+[PRIVATE]
+
+# Repository has a .gitignore file in the root
+gitignore=off
+
+
 
 # # active branches
 # - merged
