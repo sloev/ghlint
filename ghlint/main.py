@@ -1,5 +1,5 @@
-from datetime import datetime
 import configparser
+from datetime import datetime
 import os
 from github import Github
 from termcolor import colored, cprint
@@ -10,15 +10,15 @@ GITHUB_PASSWORD = os.getenv("GITHUB_PASSWORD")
 
 
 def main():
-    ghlintrc = read_ghlintrc()
     github = Github(GITHUB_USERNAME, GITHUB_PASSWORD)
 
     repo_type = "owner"
     for repo in github.get_user().get_repos(repo_type):
         if repo.fork is False:
-            lint(repo, ghlintrc)
+            if repo.name == "ghlint-foobar": # this is for debugging only
+                lint(repo)
 
-def lint(repo, ghlintr):
+def lint(repo):
     cprint(repo.name + " (", "white", end="")
     if repo.private is True:
         cprint("Private", "red", end="")
@@ -26,11 +26,17 @@ def lint(repo, ghlintr):
         cprint("Public", "green", end="")
     cprint(")", "white")
 
-    #print ghlintr.sections()
+    ghlintrc = read_ghlintrc()
+    print "this config"
+    print ghlintrc.sections()
 
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == "master":
+            file = repo.get_file_contents("/.ghlintrc")
+            decoded_content = "# Test " + "\r\n" + file.decoded_content
+            print decoded_content
+
             has_editorconfig = False
             has_gitignore = False
 
