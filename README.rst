@@ -11,8 +11,10 @@ Set the environment variables `GITHUB_USERNAME` and `GITHUB_PASSWORD` to your Gi
 .. code-block::
 
     [SETTINGS]
+
     # GitHub username
     username=YOUR_USERNAME
+
     # GitHub password or personal access token
     password=YOUR_PASSWORD
 
