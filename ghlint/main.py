@@ -1,39 +1,28 @@
-import configparser
 import os
 import lint
+import utils
 from github import Github
 
 
-def run(username, password):
-    github = Github(username, password)
-    ghlintrc = read_ghlintrc()
+def run(config):
+    github = Github(config["username"], config["password"])
 
-    repo_type = "owner"
-    for repo in github.get_user().get_repos(repo_type):
+    account_type = config["account-type"]
+    organization = config["organization"]
+    repo_type = config["repo-type"]
+
+    if account_type == "organization":
+        repos = github.get_organization(organization).get_repos(repo_type)
+    else:
+        repos = github.get_user().get_repos(repo_type)
+
+    for repo in repos:
         if repo.fork is False:
-            if repo.name == "ghlint-foobar": # this is for debugging only
-                lint.lint(repo, ghlintrc)
-
-def find_ghlintrc():
-    ghlintrc = None
-
-    if os.path.exists(".ghlintrc"):
-        ghlintrc = os.path.abspath(".ghlintrc")
-
-    return ghlintrc
-
-def read_ghlintrc():
-    config = configparser.ConfigParser()
-    config.read(find_ghlintrc())
-
-    return config
+            lint.lint(repo)
 
 
 def main():
-    username = os.getenv("GITHUB_USERNAME")
-    password = os.getenv("GITHUB_PASSWORD")
-
-    run(username, password)
+    run(utils.get_config())
 
 if __name__ == "__main__":
     main()

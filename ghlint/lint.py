@@ -1,9 +1,21 @@
 from datetime import datetime
 from termcolor import cprint
+import utils
 
+def lint(repo):
+     # this is for debugging only
+    if repo.name != "ghlint-foobar":
+        return
 
-def lint(repo, ghlintrc):
-    print "foo"
+    branches = repo.get_branches()
+    for branch in branches:
+        if branch.name == "master":
+            file_ = repo.get_file_contents("/.ghlintrc")
+            ghlintrc = utils.ghlintrc_merged(file_.decoded_content)
+
+            print repo.name
+            print ghlintrc.get("ALL", "editorconfig")
+
 
 def foo(repo, ghlintrc):
     cprint(repo.name + " (", "white", end="")
