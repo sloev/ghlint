@@ -1,6 +1,6 @@
 from datetime import datetime
 from termcolor import cprint
-from ghlint import rules
+from ghlint import config
 
 def lint(repo):
      # this is for debugging only
@@ -11,7 +11,7 @@ def lint(repo):
     for branch in branches:
         if branch.name == "master":
             file_ = repo.get_file_contents("/.ghlintrc")
-            ghlintrc = rules.merged(file_.decoded_content)
+            ghlintrc = config.merged(file_.decoded_content)
 
             print repo.name
             print ghlintrc.get("ALL", "editorconfig")
