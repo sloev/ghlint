@@ -1,4 +1,10 @@
-[CONFIG]
+[SETTINGS]
+
+# GitHub username
+username=
+
+# GitHub password or personal access token
+password=
 
 # GitHub account type: user, organization. Default: user
 account-type=user

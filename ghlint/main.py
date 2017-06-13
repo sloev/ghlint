@@ -1,15 +1,14 @@
-import os
-import lint
-import utils
+from ghlint import config
+from ghlint import lint
 from github import Github
 
 
-def run(config):
-    github = Github(config["username"], config["password"])
+def run(settings):
+    github = Github(settings["username"], settings["password"])
 
-    account_type = config["account-type"]
-    organization = config["organization"]
-    repo_type = config["repo-type"]
+    account_type = settings["account-type"]
+    organization = settings["organization"]
+    repo_type = settings["repo-type"]
 
     if account_type == "organization":
         repos = github.get_organization(organization).get_repos(repo_type)
@@ -22,7 +21,7 @@ def run(config):
 
 
 def main():
-    run(utils.get_config())
+    run(config.settings())
 
 if __name__ == "__main__":
     main()
