@@ -1,7 +1,17 @@
-# Configuring Rules
-# rulename=off|warn|error
+[CONFIG]
+
+# GitHub account type: user, organization. Default: user
+account-type=user
+
+# Name of your organization
+organization=
+
+# GitHub repository type: all, owner, public, private, member. Default: all
+repo-type=owner
 
 [ALL]
+
+# rulename=off|warn|error
 
 # Repository has a .editorconfig file in the root
 editorconfig=warn
