@@ -9,12 +9,19 @@ def lint(repo):
 
     branches = repo.get_branches()
     for branch in branches:
-        if branch.name == "master":
+        if branch.name == repo.default_branch:
             file_ = repo.get_file_contents("/.ghlintrc")
             ghlintrc = config.merged(file_.decoded_content)
 
             print repo.name
             print ghlintrc.get("ALL", "editorconfig")
+
+            cprint(repo.name + " (", "white", end="")
+            if repo.private is True:
+                cprint("Private", "red", end="")
+            else:
+                cprint("Public", "green", end="")
+            cprint(")", "white")
 
 
 def foo(repo, ghlintrc):
@@ -25,15 +32,9 @@ def foo(repo, ghlintrc):
         cprint("Public", "green", end="")
     cprint(")", "white")
 
-    print "this config"
-    print ghlintrc.sections()
-
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == "master":
-            file_ = repo.get_file_contents("/.ghlintrc")
-            decoded_content = "# Test " + "\r\n" + file_.decoded_content
-            print decoded_content
 
             has_editorconfig = False
             has_gitignore = False
