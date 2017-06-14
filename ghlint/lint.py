@@ -24,18 +24,29 @@ def lint(repo):
 
 def rule_editorconfig(repo, ghlintrc):
     print root_has_file(repo, ".editorconfig")
-    print ghlintrc.get("ALL", "editorconfig")
+    print rule_value(repo, ghlintrc, "editorconfig")
 
 def rule_gitignore(repo, ghlintrc):
     print root_has_file(repo, ".gitignore")
-    print ghlintrc.get("ALL", "gitignore")
+    print rule_value(repo, ghlintrc, "gitignore")
 
-def root_has_file(repo, filename):
-    for file_in_root in repo.get_dir_contents("/"):
-        if file_in_root == filename:
+def root_has_file(repo, file_name):
+    root = "/"
+
+    for file_root in repo.get_dir_contents(root):
+        if file_root == file_name:
             return True
 
     return False
+
+def rule_value(repo, ghlintrc, rule_name):
+    value = ghlintrc.get("ALL", rule_name)
+
+    if not repo.private:
+        if ghlintrc.has_option("PRIVATE", rule_name):
+            value = ghlintrc.get("PRIVATE", rule_name)
+
+    return value
 
 def foo(repo, ghlintrc):
     pulls = repo.get_pulls()
