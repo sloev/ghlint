@@ -12,8 +12,9 @@ account-type=user
 # Name of your organization
 organization=
 
-# GitHub repository type: all, owner, public, private, member. Default: all
+# GitHub repository type: all, owner, public, private, member. Default: owner
 repo-type=owner
+
 
 [ALL]
 
@@ -24,6 +25,7 @@ editorconfig=warn
 
 # Repository has a .gitignore file in the root
 gitignore=warn
+
 
 [PRIVATE]
 
