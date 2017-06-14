@@ -3,34 +3,29 @@ from termcolor import cprint
 from ghlint import config
 
 def lint(repo):
-     # this is for debugging only
-    if repo.name != "ghlint-foobar":
+    # this is for debugging only
+    if repo.name != "boilerplate-api":
         return
 
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == repo.default_branch:
-            file_ = repo.get_file_contents("/.ghlintrc")
-            ghlintrc = config.merged(file_.decoded_content)
+            try:
+                file_ = repo.get_file_contents("/.ghlintrc")
+                ghlintrc = config.merged(file_.decoded_content)
+            except:
+                ghlintrc = config.default()
 
             if repo.private:
                 print repo.full_name + " [Private]"
             else:
                 print repo.full_name
 
+            rule_ghlintrc(repo, ghlintrc)
             rule_editorconfig(repo, ghlintrc)
             rule_gitignore(repo, ghlintrc)
 
-
-def rule_editorconfig(repo, ghlintrc):
-    print root_has_file(repo, ".editorconfig")
-    print rule_value(repo, ghlintrc, "editorconfig")
-
-def rule_gitignore(repo, ghlintrc):
-    print root_has_file(repo, ".gitignore")
-    print rule_value(repo, ghlintrc, "gitignore")
-
-def root_has_file(repo, file_name):
+def get_file_found(repo, file_name):
     root = "/"
 
     for file_root in repo.get_dir_contents(root):
@@ -39,7 +34,7 @@ def root_has_file(repo, file_name):
 
     return False
 
-def rule_value(repo, ghlintrc, rule_name):
+def get_rule_value(repo, ghlintrc, rule_name):
     value = ghlintrc.get("ALL", rule_name)
 
     if repo.private:
@@ -47,6 +42,31 @@ def rule_value(repo, ghlintrc, rule_name):
             value = ghlintrc.get("PRIVATE", rule_name)
 
     return value
+
+def print_message(condition, rule, message):
+    if not condition:
+        if rule == "warn":
+            cprint(message, "yellow")
+        elif rule == "error":
+            cprint(message, "red")
+
+def rule_ghlintrc(repo, ghlintrc):
+    condition = get_file_found(repo, ".ghlintrc")
+    rule = get_rule_value(repo, ghlintrc, "ghlintrc")
+    message = "File .ghlintrc not found"
+    print_message(condition, rule, message)
+
+def rule_editorconfig(repo, ghlintrc):
+    condition = get_file_found(repo, ".editorconfig")
+    rule = get_rule_value(repo, ghlintrc, "editorconfig")
+    message = "File .editorconfig not found"
+    print_message(condition, rule, message)
+
+def rule_gitignore(repo, ghlintrc):
+    condition = get_file_found(repo, ".gitignore")
+    rule = get_rule_value(repo, ghlintrc, "gitignore")
+    message = "File .gitignore not found"
+    print_message(condition, rule, message)
 
 def foo(repo, ghlintrc):
     pulls = repo.get_pulls()
