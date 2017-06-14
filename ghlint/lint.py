@@ -4,8 +4,8 @@ from ghlint import config
 
 def lint(repo):
     # this is for debugging only
-    if repo.name != "boilerplate-api":
-        return
+    #if repo.name != "boilerplate-api":
+    #    return
 
     branches = repo.get_branches()
     for branch in branches:
