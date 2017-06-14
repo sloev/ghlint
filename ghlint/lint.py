@@ -29,7 +29,7 @@ def get_file_found(repo, file_name):
     root = "/"
 
     for file_root in repo.get_dir_contents(root):
-        if file_root == file_name:
+        if file_root.path == file_name:
             return True
 
     return False
