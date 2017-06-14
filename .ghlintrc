@@ -20,6 +20,9 @@ repo-type=owner
 
 # rulename=off|warn|error
 
+# Repository has a .ghlintrc file in the root
+ghlintrc=off
+
 # Repository has a .editorconfig file in the root
 editorconfig=warn
 
