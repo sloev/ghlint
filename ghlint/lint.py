@@ -42,7 +42,7 @@ def root_has_file(repo, file_name):
 def rule_value(repo, ghlintrc, rule_name):
     value = ghlintrc.get("ALL", rule_name)
 
-    if not repo.private:
+    if repo.private:
         if ghlintrc.has_option("PRIVATE", rule_name):
             value = ghlintrc.get("PRIVATE", rule_name)
 
