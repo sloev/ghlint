@@ -1,6 +1,8 @@
+from __future__ import print_function
 from datetime import datetime
 from termcolor import cprint
 import config
+from github.GithubException import UnknownObjectException
 
 def lint(repo):
     # this is for debugging only
@@ -13,13 +15,13 @@ def lint(repo):
             try:
                 file_ = repo.get_file_contents("/.ghlintrc")
                 ghlintrc = config.merged(file_.decoded_content)
-            except:
+            except UnknownObjectException:
                 ghlintrc = config.default()
 
             if repo.private:
-                print repo.full_name + " [Private]"
+                print(repo.full_name + " [Private]")
             else:
-                print repo.full_name
+                print(repo.full_name)
 
             rule_ghlintrc(repo, ghlintrc)
             rule_editorconfig(repo, ghlintrc)
@@ -68,10 +70,10 @@ def rule_gitignore(repo, ghlintrc):
     message = "File .gitignore not found"
     print_message(condition, rule, message)
 
-def foo(repo, ghlintrc):
-    pulls = repo.get_pulls()
-    for pull in pulls:
-        print "* " + pull.head.label[11:]
-        pr_age = datetime.now() - pull.created_at
-        if pr_age.days >= 7: # old pull requests
-            print repo.name + " " + pull.head.label[11:]
+#def foo(repo, ghlintrc):
+#    pulls = repo.get_pulls()
+#    for pull in pulls:
+#        print("* " + pull.head.label[11:])
+#        pr_age = datetime.now() - pull.created_at
+#        if pr_age.days >= 7: # old pull requests
+#            print(repo.name + " " + pull.head.label[11:])

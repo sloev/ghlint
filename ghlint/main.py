@@ -1,6 +1,6 @@
 #
 # import sys
-# print sys.version
+# print(sys.version)
 #
 import config
 import lint
