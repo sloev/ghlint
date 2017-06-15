@@ -7,6 +7,7 @@ def run(settings):
     username = settings["username"]
     password = settings["password"]
 
+    # https://developer.github.com/v4/explorer/
     response = requests.post("https://api.github.com/graphql",
                              auth=HTTPBasicAuth(username, password),
                              data=("{ \"query\": \"query "
