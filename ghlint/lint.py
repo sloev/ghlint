@@ -1,8 +1,8 @@
 from __future__ import print_function
-from datetime import datetime
-from termcolor import cprint
 import config
+from termcolor import cprint
 from github.GithubException import UnknownObjectException
+
 
 def lint(repo):
     # this is for debugging only
