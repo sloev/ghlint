@@ -9,10 +9,16 @@ def run(settings):
 
     response = requests.post("https://api.github.com/graphql",
                              auth=HTTPBasicAuth(username, password),
-                             data="{ \"query\": \"query { viewer { login } }\" }")
+                             data=("{ \"query\": \"query "
+                                   "{"
+                                   "  rateLimit { limit, remaining }"
+                                   "  viewer { login }"
+                                   "}"
+                                   "\" }"))
 
     print(response.status_code)
     print(response.text)
+
 
 def main():
     run(config.settings())
