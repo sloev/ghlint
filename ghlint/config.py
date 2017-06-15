@@ -1,4 +1,4 @@
-import configparser
+import ConfigParser
 import os
 import StringIO
 
@@ -31,7 +31,7 @@ def settings():
     }
 
 def default():
-    parser = configparser.ConfigParser()
+    parser = ConfigParser.ConfigParser()
     parser.read(ghlintrc_path())
 
     return parser

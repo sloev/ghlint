@@ -1,6 +1,6 @@
 from datetime import datetime
 from termcolor import cprint
-from ghlint import config
+import config
 
 def lint(repo):
     # this is for debugging only

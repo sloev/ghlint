@@ -1,5 +1,9 @@
-from ghlint import config
-from ghlint import lint
+#
+# import sys
+# print sys.version
+#
+import config
+import lint
 from github import Github
 
 
