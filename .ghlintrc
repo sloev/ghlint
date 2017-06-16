@@ -29,6 +29,9 @@ editorconfig=warn
 # Repository has a .gitignore file in the root
 gitignore=warn
 
+# Default branch is protected from force-pushes and deletion
+protection=warn
+
 
 [PRIVATE]
 

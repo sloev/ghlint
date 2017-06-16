@@ -26,6 +26,7 @@ def lint(repo):
             rule_ghlintrc(repo, ghlintrc)
             rule_editorconfig(repo, ghlintrc)
             rule_gitignore(repo, ghlintrc)
+            rule_protection(repo, ghlintrc)
 
 def get_file_found(repo, file_name):
     root = "/"
@@ -69,6 +70,14 @@ def rule_gitignore(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "gitignore")
     message = "File .gitignore not found"
     print_message(condition, rule, message)
+
+def rule_protection(repo, ghlintrc):
+    branch = repo.get_protected_branch(repo.default_branch)
+    condition = branch.protected
+    rule = get_rule_value(repo, ghlintrc, "protection")
+    message = "Branch '" + repo.default_branch + "' not protected"
+    print_message(condition, rule, message)
+
 
 #def foo(repo, ghlintrc):
 #    pulls = repo.get_pulls()
