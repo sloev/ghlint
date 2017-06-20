@@ -1,10 +1,7 @@
 ghlint
 ======
 
-
-.. image:: https://travis-ci.org/martinbuberl/ghlint.svg?branch=master
-    :target: https://travis-ci.org/martinbuberl/ghlint
-
+|build| |pypi|
 
 Linting utility for GitHub.
 
@@ -55,3 +52,10 @@ Next
 # Python
 # - pypi
 # master branch protection
+
+
+.. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg?label=build
+    :target: http://travis-ci.org/martinbuberl/ghlint
+
+.. |pypi| image:: https://img.shields.io/pypi/v/ghlint.svg?label=pypi
+    :target: https://pypi.python.org/pypi/ghlint
