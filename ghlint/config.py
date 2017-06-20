@@ -3,7 +3,10 @@ try:
 except ImportError:
     import ConfigParser as configparser
 import os
-from io import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 
 GHLINTRC = ".ghlintrc"
@@ -40,7 +43,7 @@ def default():
     return parser
 
 def merged(ghlintrc_repo):
-    buf = StringIO.StringIO(ghlintrc_repo)
+    buf = StringIO(ghlintrc_repo.decode("utf-8"))
 
     parser = default()
     parser.readfp(buf)
