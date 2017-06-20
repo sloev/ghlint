@@ -54,7 +54,7 @@ Next
 # master branch protection
 
 
-.. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg?label=build
+.. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg
     :target: https://travis-ci.org/martinbuberl/ghlint
 
 .. |pypi| image:: https://img.shields.io/pypi/v/ghlint.svg
