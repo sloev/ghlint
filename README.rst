@@ -1,8 +1,10 @@
 ghlint
 ======
 
+
 .. image:: https://travis-ci.org/martinbuberl/ghlint.svg?branch=master
     :target: https://travis-ci.org/martinbuberl/ghlint
+
 
 Linting utility for GitHub.
 
@@ -32,6 +34,8 @@ Run
 Next
 ----
 
+# - description
+# - CONTRIBUTING.md
 # # active branches
 # - merged
 # - un-merged
