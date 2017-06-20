@@ -55,7 +55,7 @@ Next
 
 
 .. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg?label=build
-    :target: http://travis-ci.org/martinbuberl/ghlint
+    :target: https://travis-ci.org/martinbuberl/ghlint
 
-.. |pypi| image:: https://img.shields.io/pypi/v/ghlint.svg?label=pypi
+.. |pypi| image:: https://img.shields.io/pypi/v/ghlint.svg
     :target: https://pypi.python.org/pypi/ghlint
