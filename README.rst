@@ -28,31 +28,6 @@ Run
     pip install -r requirements.txt
     python ghlint/main.py
 
-Next
-----
-
-# - description
-# - CONTRIBUTING.md
-# # active branches
-# - merged
-# - un-merged
-# # stale branches
-# - merged
-# - un-merged
-# # open pull requests
-# - proportion open:closed pull requests
-# # open issues
-# - proportion open:closed issues
-# license detection
-# - https://developer.github.com/v3/licenses/#get-a-repositorys-license
-# CI
-# Node.js
-# - npm
-# - package.json
-# Python
-# - pypi
-# master branch protection
-
 
 .. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg
     :target: https://travis-ci.org/martinbuberl/ghlint
