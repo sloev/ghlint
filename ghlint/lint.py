@@ -24,9 +24,9 @@ def lint(repo):
             else:
                 print(repo.full_name)
 
-            rule_ghlintrc(repo, ghlintrc)
-            rule_editorconfig(repo, ghlintrc)
             rule_gitignore(repo, ghlintrc)
+            rule_editorconfig(repo, ghlintrc)
+            rule_ghlintrc(repo, ghlintrc)
             rule_protection(repo, ghlintrc)
             rule_old_pulls(repo, ghlintrc)
 
@@ -55,13 +55,13 @@ def print_message(condition, rule, message):
         elif rule == "error":
             cprint(message, "red")
 
-def rule_ghlintrc(repo, ghlintrc):
-    rule = get_rule_value(repo, ghlintrc, "ghlintrc")
+def rule_gitignore(repo, ghlintrc):
+    rule = get_rule_value(repo, ghlintrc, "gitignore")
     if rule == "off":
         return
 
-    condition = get_file_found(repo, ".ghlintrc")
-    message = "File .ghlintrc not found"
+    condition = get_file_found(repo, ".gitignore")
+    message = "File .gitignore not found"
     print_message(condition, rule, message)
 
 def rule_editorconfig(repo, ghlintrc):
@@ -73,13 +73,13 @@ def rule_editorconfig(repo, ghlintrc):
     message = "File .editorconfig not found"
     print_message(condition, rule, message)
 
-def rule_gitignore(repo, ghlintrc):
-    rule = get_rule_value(repo, ghlintrc, "gitignore")
+def rule_ghlintrc(repo, ghlintrc):
+    rule = get_rule_value(repo, ghlintrc, "ghlintrc")
     if rule == "off":
         return
 
-    condition = get_file_found(repo, ".gitignore")
-    message = "File .gitignore not found"
+    condition = get_file_found(repo, ".ghlintrc")
+    message = "File .ghlintrc not found"
     print_message(condition, rule, message)
 
 def rule_protection(repo, ghlintrc):

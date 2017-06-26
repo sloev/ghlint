@@ -18,16 +18,14 @@ repo-type=owner
 
 [ALL]
 
-# rulename=off|warn|error
-
-# Repository has a .ghlintrc file in the root
-ghlintrc=off
+# Repository has a .gitignore file in the root
+gitignore=warn
 
 # Repository has a .editorconfig file in the root
 editorconfig=warn
 
-# Repository has a .gitignore file in the root
-gitignore=warn
+# Repository has a .ghlintrc file in the root
+ghlintrc=off
 
 # Default branch is protected from force-pushes and deletion
 protection=warn
