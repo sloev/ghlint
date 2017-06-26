@@ -26,7 +26,7 @@ def settings():
     password = os.getenv("GITHUB_PASSWORD") or items["password"]
     account_type = items["account-type"] or "user"
     organization = items["organization"]
-    repo_type = items["repo-type"] or "all"
+    repo_type = items["repo-type"] or "owner"
 
     return {
         "username": username,
