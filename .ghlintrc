@@ -32,6 +32,10 @@ gitignore=warn
 # Default branch is protected from force-pushes and deletion
 protection=warn
 
+# Default branch has open pull requests older than [rule_old_pulls_max_age] days
+rule_old_pulls=warn
+rule_old_pulls_max_age=7
+
 
 [PRIVATE]
 
