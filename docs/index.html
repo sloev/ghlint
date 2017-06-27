@@ -31,8 +31,7 @@
           <th>Rule</th>
           <th>Description</th>
           <th>Options</th>
-          <th>Default (All)</th>
-          <th>Default (Private)</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +40,6 @@
           <td>require <em>.gitignore</em> file</td>
           <td><code>off</code>, <code>warn</code>, <code>error</code></td>
           <td><code>warn</code></td>
-          <td>n/a</td>
         </tr>
         <tr>
           <td colspan="5"><small>Checks that the repository has a <em>.gitignore</em> file in the root directory.</small></td>
@@ -51,7 +49,6 @@
           <td>require <em>.editorconfig</em> file</td>
           <td><code>off</code>, <code>warn</code>, <code>error</code></td>
           <td><code>warn</code></td>
-          <td>n/a</td>
         </tr>
         <tr>
           <td colspan="5"><small>Checks that the repository has a <em>.editorconfig</em> file in the root directory.</small></td>
@@ -61,7 +58,6 @@
           <td>require <em>.ghlintrc</em> file</td>
           <td><code>off</code>, <code>warn</code>, <code>error</code></td>
           <td><code>off</code></td>
-          <td>n/a</td>
         </tr>
         <tr>
           <td colspan="5"><small>Checks that the repository has a <em>.ghlintrc</em> file in the root directory.</small></td>
@@ -71,10 +67,18 @@
           <td>require default branch protection</td>
           <td><code>off</code>, <code>warn</code>, <code>error</code></td>
           <td><code>warn</code></td>
-          <td>n/a</td>
         </tr>
         <tr>
           <td colspan="5"><small>Checks that the repository's default branch has protection enabled to ensure that collaborators cannot make irrevocable changes (e.g. force-pushes, deletion).</small></td>
+        </tr>
+        <tr>
+          <td><strong>old-pull</strong></td>
+          <td>disallow old pull request</td>
+          <td><code>off</code>, <code>warn</code>, <code>error</code></td>
+          <td><code>warn</code></td>
+        </tr>
+        <tr>
+          <td colspan="5"><small>Verifies that the repository doesn't have any open pull requests older than <strong>old-pull-max-age</strong> days. Default value is <code>7</code> days.</small></td>
         </tr>
         <!--
         circleci    require circle.yml file
