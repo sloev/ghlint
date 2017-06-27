@@ -109,26 +109,3 @@ def rule_old_pulls(repo, ghlintrc):
             print(pull.head.label)
             print(pull.head.ref)
             print(repo.name + " " + pull.head.label[11:])
-
-# - description
-# - CONTRIBUTING.md
-# # active branches
-# - merged
-# - un-merged
-# # stale branches
-# - merged
-# - un-merged
-# # open pull requests
-# - proportion open:closed pull requests
-# # open issues
-# - proportion open:closed issues
-# license detection
-# - https://developer.github.com/v3/licenses/#get-a-repositorys-license
-# CI
-# Node.js
-# - npm
-# - package.json
-# Python
-# - pypi
-# master branch protection
-

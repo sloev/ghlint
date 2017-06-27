@@ -81,9 +81,29 @@
           <td colspan="5"><small>Verifies that the repository doesn't have any open pull requests older than <strong>old-pull-max-age</strong> days. Default value is <code>7</code> days.</small></td>
         </tr>
         <!--
-        circleci    require circle.yml file
-        travisci    require .travis.yml file
-        appveyor    require appveyor.yml file
+
+        Possible rules
+
+        circleci       require circle.yml file
+        travisci       require .travis.yml file
+        appveyor       require appveyor.yml file
+        contributing   require CONTRIBUTING.md file
+        license        require LICENSE file
+        license-osi    require OSI approved license
+
+        description    require description
+
+        active branches
+        - merged
+        - un-merged
+
+        stale branches
+        - merged
+        - un-merged
+
+        proportion open:closed pull requests
+        proportion open:closed issues
+
         -->
       </tbody>
     </table>
