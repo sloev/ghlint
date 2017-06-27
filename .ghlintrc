@@ -18,24 +18,22 @@ repo-type=owner
 
 [ALL]
 
-# Repository has a .gitignore file in the root
+# require .gitignore file
 gitignore=warn
 
-# Repository has a .editorconfig file in the root
+# require .editorconfig file
 editorconfig=warn
 
-# Repository has a .ghlintrc file in the root
+# require .ghlintrc file in
 ghlintrc=off
 
-# Default branch is protected from force-pushes and deletion
+# require default branch protection
 protection=warn
 
 # Default branch has open pull requests older than [rule_old_pulls_max_age] days
-rule_old_pulls=warn
-rule_old_pulls_max_age=7
+old-pulls=warn
+old-pulls-max-age=7
 
 
 [PRIVATE]
 
-# Repository has a .gitignore file in the root
-gitignore=off
