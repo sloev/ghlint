@@ -28,7 +28,7 @@ def lint(repo):
             rule_editorconfig(repo, ghlintrc)
             rule_ghlintrc(repo, ghlintrc)
             rule_protection(repo, ghlintrc)
-            rule_old_pulls(repo, ghlintrc)
+            rule_old_pull(repo, ghlintrc)
 
 def get_file_found(repo, file_name):
     root = "/"
@@ -91,7 +91,7 @@ def rule_protection(repo, ghlintrc):
     if not branch.protected:
         print_message(rule, message)
 
-def rule_old_pulls(repo, ghlintrc):
+def rule_old_pull(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "old-pull")
     if rule == "off":
         return
