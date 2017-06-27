@@ -37,3 +37,4 @@ old-pull-max-age=7
 
 [PRIVATE]
 
+# overwrite rules here for private repositories only
