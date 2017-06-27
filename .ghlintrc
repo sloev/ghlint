@@ -30,7 +30,7 @@ ghlintrc=off
 # require default branch protection
 protection=warn
 
-# Default branch has open pull requests older than [old-pull-max-age] days
+# disallow old pull request
 old-pull=warn
 old-pull-max-age=7
 
