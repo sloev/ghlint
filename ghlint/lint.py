@@ -93,14 +93,14 @@ def rule_protection(repo, ghlintrc):
     print_message(condition, rule, message)
 
 def rule_old_pulls(repo, ghlintrc):
-    rule = get_rule_value(repo, ghlintrc, "old-pulls")
+    rule = get_rule_value(repo, ghlintrc, "old-pull")
     if rule == "off":
         return
 
     pulls = repo.get_pulls()
     for pull in pulls:
         pull_age = datetime.now() - pull.created_at
-        pull_max_age = int(get_rule_value(repo, ghlintrc, "old-pulls-max-age"))
+        pull_max_age = int(get_rule_value(repo, ghlintrc, "old-pull-max-age"))
         if pull_age.days >= pull_max_age and pull.state == "open":
             print("title: " + pull.title)
             print("url: " + pull.url)
