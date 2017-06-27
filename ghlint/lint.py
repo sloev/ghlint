@@ -48,39 +48,38 @@ def get_rule_value(repo, ghlintrc, rule_name):
 
     return value
 
-def print_message(condition, rule, message):
-    if not condition:
-        if rule == "warn":
-            cprint(message, "yellow")
-        elif rule == "error":
-            cprint(message, "red")
+def print_message(rule, message):
+    if rule == "warn":
+        cprint(message, "yellow")
+    elif rule == "error":
+        cprint(message, "red")
 
 def rule_gitignore(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "gitignore")
     if rule == "off":
         return
 
-    condition = get_file_found(repo, ".gitignore")
     message = "File .gitignore not found"
-    print_message(condition, rule, message)
+    if not get_file_found(repo, ".gitignore"):
+        print_message(rule, message)
 
 def rule_editorconfig(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "editorconfig")
     if rule == "off":
         return
 
-    condition = get_file_found(repo, ".editorconfig")
     message = "File .editorconfig not found"
-    print_message(condition, rule, message)
+    if not get_file_found(repo, ".editorconfig"):
+        print_message(rule, message)
 
 def rule_ghlintrc(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "ghlintrc")
     if rule == "off":
         return
 
-    condition = get_file_found(repo, ".ghlintrc")
     message = "File .ghlintrc not found"
-    print_message(condition, rule, message)
+    if not get_file_found(repo, ".ghlintrc"):
+        print_message(rule, message)
 
 def rule_protection(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "protection")
@@ -88,9 +87,9 @@ def rule_protection(repo, ghlintrc):
         return
 
     branch = repo.get_protected_branch(repo.default_branch)
-    condition = branch.protected
     message = "Branch '" + repo.default_branch + "' not protected"
-    print_message(condition, rule, message)
+    if not branch.protected:
+        print_message(rule, message)
 
 def rule_old_pulls(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "old-pull")
@@ -102,10 +101,5 @@ def rule_old_pulls(repo, ghlintrc):
         pull_age = datetime.now() - pull.created_at
         pull_max_age = int(get_rule_value(repo, ghlintrc, "old-pull-max-age"))
         if pull_age.days >= pull_max_age and pull.state == "open":
-            print("title: " + pull.title)
-            print("url: " + pull.url)
-            print("number: " + str(pull.number))
-            print(pull.base)
-            print(pull.head.label)
-            print(pull.head.ref)
-            print(repo.name + " " + pull.head.label[11:])
+            message = "Pull request #" + str(pull.number) + " '" + pull.title + "' is " + str(pull_age.days) + " days old"
+            print_message(rule, message)
