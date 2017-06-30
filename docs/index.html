@@ -8,9 +8,9 @@
 
   <link rel="canonical" href="https://ghlint.org/" />
   <link rel="apple-touch-icon" href="/content/img/apple-touch-icon.png" />
-<link rel="icon" type="image/png" href="/content/img/favicon.png" />
-<meta name="msapplication-TileColor" content="#ffffff" />
-<meta name="msapplication-TileImage" content="/content/img/mstile.png" />
+  <link rel="icon" type="image/png" href="/content/img/favicon.png" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/content/img/mstile.png" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <style type="text/css">
     body {
@@ -43,6 +43,15 @@
         </tr>
         <tr>
           <td colspan="5"><small>Checks that the repository has a <em>.gitignore</em> file in the root directory.</small></td>
+        </tr>
+        <tr>
+          <td><strong>contributing</strong></td>
+          <td>require <em>CONTRIBUTING</em> file</td>
+          <td><code>off</code>, <code>warn</code>, <code>error</code></td>
+          <td><code>off</code></td>
+        </tr>
+        <tr>
+          <td colspan="5"><small>Checks that the repository has a <em>CONTRIBUTING</em> file in the root directory.</small></td>
         </tr>
         <tr>
           <td><strong>editorconfig</strong></td>
@@ -84,14 +93,15 @@
 
         Possible rules
 
-        circleci       require circle.yml file
-        travisci       require .travis.yml file
-        appveyor       require appveyor.yml file
-        contributing   require CONTRIBUTING.md file
-        license        require LICENSE file
-        license-osi    require OSI approved license
 
-        description    require description
+        circleci           require circle.yml file
+        travisci           require .travis.yml file
+        appveyor           require appveyor.yml file
+        code-of-conduct    require CODE_OF_CONDUCT.md file
+        license            require LICENSE file
+        license-osi        require OSI approved license
+
+        description        require description
 
         active branches
         - merged

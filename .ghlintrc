@@ -21,6 +21,9 @@ repo-type=owner
 # require .gitignore file
 gitignore=warn
 
+# require CONTRIBUTING file
+contributing=off
+
 # require .editorconfig file
 editorconfig=warn
 

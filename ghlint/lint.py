@@ -25,6 +25,7 @@ def lint(repo):
                 print(repo.full_name)
 
             rule_gitignore(repo, ghlintrc)
+            rule_contributing(repo, ghlintrc)
             rule_editorconfig(repo, ghlintrc)
             rule_ghlintrc(repo, ghlintrc)
             rule_protection(repo, ghlintrc)
@@ -61,6 +62,15 @@ def rule_gitignore(repo, ghlintrc):
 
     message = "File .gitignore not found"
     if not get_file_found(repo, ".gitignore"):
+        print_message(rule, message)
+
+def rule_contributing(repo, ghlintrc):
+    rule = get_rule_value(repo, ghlintrc, "contributing")
+    if rule == "off":
+        return
+
+    message = "File CONTRIBUTING not found"
+    if not get_file_found(repo, "CONTRIBUTING"):
         print_message(rule, message)
 
 def rule_editorconfig(repo, ghlintrc):
