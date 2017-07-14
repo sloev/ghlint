@@ -116,6 +116,22 @@ def rule_old_pull(repo, ghlintrc):
             print_message(rule, message)
 
 def rule_loose_branch(repo, ghlintrc):
+    rule = get_rule_value(repo, ghlintrc, "loose-branch")
+    if rule == "off":
+        return
+
     branches = repo.get_branches()
+    branch_names = []
     for branch in branches:
-        print("x: {}".format(branch.name))
+        branch_names.append(branch.name)
+
+    pulls = repo.get_pulls()
+    pull_refs = []
+    for pull in pulls:
+        pull_refs.append(pull.head.ref)
+
+    loose_branch_names = list(set(branch_names).difference(pull_refs))
+    for loose_branch_name in loose_branch_names:
+        if loose_branch_name != repo.default_branch:
+            message = "Branch '{}' without pull request".format(loose_branch_name)
+            print_message(rule, message)

@@ -37,6 +37,9 @@ protection=warn
 old-pull=warn
 old-pull-max-age=7
 
+# disallow branch without pull request
+loose-branch=warn
+
 
 [PRIVATE]
 
