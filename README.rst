@@ -28,6 +28,16 @@ Run
     pip install -r requirements.txt
     python ghlint/main.py
 
+Tooling
+-------
+
+Using pyenv<https://github.com/pyenv/pyenv>_ to test against different Python versions:
+
+.. code block:: sh
+
+    pyenv versions
+    pyenv global 3.6.1
+
 
 .. |build| image:: https://img.shields.io/travis/martinbuberl/ghlint/master.svg
     :target: https://travis-ci.org/martinbuberl/ghlint
