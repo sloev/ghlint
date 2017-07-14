@@ -31,9 +31,9 @@ Run
 Tooling
 -------
 
-Using `pyenv <https://github.com/pyenv/pyenv>`_ to test against different Python versions:
+Using `pyenv <https://github.com/pyenv/pyenv>`_ to switch between multiple versions of Python:
 
-.. code block:: sh
+.. code-block:: sh
 
     pyenv versions
     pyenv global 3.6.1
