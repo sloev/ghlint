@@ -20,7 +20,7 @@ def lint(repo):
                 ghlintrc = config.default()
 
             if repo.private:
-                print(repo.full_name + " [Private]")
+                print("{} [Private]".format(repo.full_name))
             else:
                 print(repo.full_name)
 
@@ -98,7 +98,7 @@ def rule_protection(repo, ghlintrc):
         return
 
     branch = repo.get_protected_branch(repo.default_branch)
-    message = "Branch '" + repo.default_branch + "' not protected"
+    message = "Branch '{}' not protected".format(repo.default_branch)
     if not branch.protected:
         print_message(rule, message)
 
@@ -112,7 +112,7 @@ def rule_old_pull(repo, ghlintrc):
         pull_age = datetime.now() - pull.created_at
         pull_max_age = int(get_rule_value(repo, ghlintrc, "old-pull-max-age"))
         if pull_age.days >= pull_max_age and pull.state == "open":
-            message = "Pull request #" + str(pull.number) + " '" + pull.title + "' is " + str(pull_age.days) + " days old"
+            message = "Pull request #{} '{}' is {} days old".format(pull.number, pull.title, pull_age.days)
             print_message(rule, message)
 
 def rule_loose_branch(repo, ghlintrc):
