@@ -31,7 +31,7 @@ Run
 Tooling
 -------
 
-Using pyenv<https://github.com/pyenv/pyenv>_ to test against different Python versions:
+Using pyenv <https://github.com/pyenv/pyenv>_ to test against different Python versions:
 
 .. code block:: sh
 
