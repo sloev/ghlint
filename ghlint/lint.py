@@ -7,8 +7,8 @@ from github.GithubException import UnknownObjectException
 
 def lint(repo):
     # this is for debugging only
-    #if repo.name != "TeamPilgrim":
-    #    return
+    if repo.name != "ghlint-foobar":
+        return
 
     branches = repo.get_branches()
     for branch in branches:
@@ -30,6 +30,7 @@ def lint(repo):
             rule_ghlintrc(repo, ghlintrc)
             rule_protection(repo, ghlintrc)
             rule_old_pull(repo, ghlintrc)
+            rule_loose_branch(repo, ghlintrc)
 
 def get_file_found(repo, file_name):
     root = "/"
@@ -113,3 +114,8 @@ def rule_old_pull(repo, ghlintrc):
         if pull_age.days >= pull_max_age and pull.state == "open":
             message = "Pull request #" + str(pull.number) + " '" + pull.title + "' is " + str(pull_age.days) + " days old"
             print_message(rule, message)
+
+def rule_loose_branch(repo, ghlintrc):
+    branches = repo.get_branches()
+    for branch in branches:
+        print("x: {}".format(branch.name))
