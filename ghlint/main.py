@@ -19,6 +19,9 @@ def run(settings):
     else:
         repos = github.get_user().get_repos(repo_type)
 
+    # TODO, 8/15/2017: Implement API rate limit warning
+    # print("{}".format(github.get_rate_limit().rate))
+
     for repo in repos:
         if repo.fork is False:
             lint.lint(repo)
