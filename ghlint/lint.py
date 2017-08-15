@@ -21,9 +21,9 @@ def lint(repo):
 
             repo_type = "private" if repo.private else "public"
             print("{}{}  {}".format(
-                colored("https://github.com/", 'white', attrs=['dark']),
-                colored(repo.full_name, 'white', attrs=['underline']),
-                colored(repo_type, 'white', attrs=['dark'])
+                colored("https://github.com/", "white", attrs=["dark"]),
+                colored(repo.full_name, "white", attrs=["underline"]),
+                colored(repo_type, "white", attrs=["dark"])
             ))
 
             rule_gitignore(repo, ghlintrc)
@@ -45,16 +45,16 @@ def get_file_found(repo, file_name):
 
     return False
 
-def get_rule_value(repo, ghlintrc, rule_name):
-    value = ghlintrc.get("ALL", rule_name)
+def get_rule_value(repo, ghlintrc, rule):
+    value = ghlintrc.get("ALL", rule)
 
     if repo.private:
-        if ghlintrc.has_option("PRIVATE", rule_name):
-            value = ghlintrc.get("PRIVATE", rule_name)
+        if ghlintrc.has_option("PRIVATE", rule):
+            value = ghlintrc.get("PRIVATE", rule)
 
     return value
 
-def print_message(severity, message):
+def print_message(rule, severity, message):
     if severity == "error":
         severity_color = "red"
     elif severity == "warn":
@@ -62,59 +62,66 @@ def print_message(severity, message):
     else: # severity == "info"
         severity_color = "white"
 
-    print("  {}  {}".format(
+    print("  {}  {}  {}".format(
         colored(severity, severity_color),
-        colored(message, 'white')
+        colored(message, "white"),
+        colored(rule, "white", attrs=["dark"])
     ))
 
 def rule_gitignore(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "gitignore")
+    rule = "gitignore"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
     message = "File .gitignore not found"
     if not get_file_found(repo, ".gitignore"):
-        print_message(severity, message)
+        print_message(rule, severity, message)
 
 def rule_contributing(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "contributing")
+    rule = "contributing"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
     message = "File CONTRIBUTING not found"
     if not get_file_found(repo, "CONTRIBUTING"):
-        print_message(severity, message)
+        print_message(rule, severity, message)
 
 def rule_editorconfig(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "editorconfig")
+    rule = "editorconfig"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
     message = "File .editorconfig not found"
     if not get_file_found(repo, ".editorconfig"):
-        print_message(severity, message)
+        print_message(rule, severity, message)
 
 def rule_ghlintrc(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "ghlintrc")
+    rule = "ghlintrc"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
     message = "File .ghlintrc not found"
     if not get_file_found(repo, ".ghlintrc"):
-        print_message(severity, message)
+        print_message(rule, severity, message)
 
 def rule_protection(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "protection")
+    rule = "protection"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
     branch = repo.get_protected_branch(repo.default_branch)
     message = "Branch '{}' not protected".format(repo.default_branch)
     if not branch.protected:
-        print_message(severity, message)
+        print_message(rule, severity, message)
 
 def rule_old_pull(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "old-pull")
+    rule = "old-pull"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
@@ -124,10 +131,11 @@ def rule_old_pull(repo, ghlintrc):
         pull_max_age = int(get_rule_value(repo, ghlintrc, "old-pull-max-age"))
         if pull_age.days >= pull_max_age and pull.state == "open":
             message = "Pull request #{} '{}' is {} days old".format(pull.number, pull.title, pull_age.days)
-            print_message(severity, message)
+            print_message(rule, severity, message)
 
 def rule_loose_branch(repo, ghlintrc):
-    severity = get_rule_value(repo, ghlintrc, "loose-branch")
+    rule = "loose-branch"
+    severity = get_rule_value(repo, ghlintrc, rule)
     if severity == "off":
         return
 
@@ -145,4 +153,4 @@ def rule_loose_branch(repo, ghlintrc):
     for loose_branch_name in loose_branch_names:
         if loose_branch_name != repo.default_branch:
             message = "Branch '{}' without pull request".format(loose_branch_name)
-            print_message(severity, message)
+            print_message(rule, severity, message)
