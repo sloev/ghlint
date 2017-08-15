@@ -1,7 +1,7 @@
 from __future__ import print_function
 from datetime import datetime
 import config
-from termcolor import colored, cprint
+from termcolor import colored
 from github.GithubException import UnknownObjectException
 
 
@@ -20,10 +20,11 @@ def lint(repo):
                 ghlintrc = config.default()
 
             repo_type = "private" if repo.private else "public"
-            print(
+            print("{}{}  {}".format(
+                colored("https://github.com/", 'white', attrs=['dark']),
                 colored(repo.full_name, 'white', attrs=['underline']),
                 colored(repo_type, 'white', attrs=['dark'])
-            )
+            ))
 
             rule_gitignore(repo, ghlintrc)
             rule_contributing(repo, ghlintrc)
@@ -32,6 +33,8 @@ def lint(repo):
             rule_protection(repo, ghlintrc)
             rule_old_pull(repo, ghlintrc)
             rule_loose_branch(repo, ghlintrc)
+
+            print("\n")
 
 def get_file_found(repo, file_name):
     root = "/"
@@ -52,10 +55,17 @@ def get_rule_value(repo, ghlintrc, rule_name):
     return value
 
 def print_message(rule, message):
-    if rule == "warn":
-        cprint(message, "yellow")
-    elif rule == "error":
-        cprint(message, "red")
+    if rule == "error":
+        rule_color = "red"
+    elif rule == "warn":
+        rule_color = "yellow"
+    else: # rule == "info"
+        rule_color = "white"
+
+    print("  {}  {}".format(
+        colored(rule, rule_color),
+        colored(message, 'white')
+    ))
 
 def rule_gitignore(repo, ghlintrc):
     rule = get_rule_value(repo, ghlintrc, "gitignore")
