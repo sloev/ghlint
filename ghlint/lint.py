@@ -1,30 +1,34 @@
+# encoding=utf8
 from __future__ import print_function
 from datetime import datetime
 import config
-from termcolor import colored
+from termcolor import colored, cprint
 from github.GithubException import UnknownObjectException
 
 
+ERROR_COUNT = 0
+WARN_COUNT = 0
+
+
 def lint(repo):
+    global ERROR_COUNT, WARN_COUNT # pylint: disable=global-statement
     # this is for debugging only
-    if repo.name != "ghlint-foobar":
-        return
+    #if repo.name != "ghlint-foobar" and repo.name != "bootstrap":
+    #    return
 
     branches = repo.get_branches()
     for branch in branches:
         if branch.name == repo.default_branch:
+            ERROR_COUNT = 0
+            WARN_COUNT = 0
+
             try:
                 file_ = repo.get_file_contents("/.ghlintrc")
                 ghlintrc = config.merged(file_.decoded_content)
             except UnknownObjectException:
                 ghlintrc = config.default()
 
-            repo_type = "private" if repo.private else "public"
-            print("{}{}  {}".format(
-                colored("https://github.com/", "white", attrs=["dark"]),
-                colored(repo.full_name, "white", attrs=["underline"]),
-                colored(repo_type, "white", attrs=["dark"])
-            ))
+            print_repo(repo)
 
             rule_gitignore(repo, ghlintrc, "gitignore")
             rule_contributing(repo, ghlintrc, "contributing")
@@ -34,7 +38,9 @@ def lint(repo):
             rule_old_pull(repo, ghlintrc, "old-pull")
             rule_loose_branch(repo, ghlintrc, "loose-branch")
 
-            print("\n")
+            print("")
+
+    print_summary()
 
 def get_file_found(repo, file_name):
     root = "/"
@@ -54,10 +60,22 @@ def get_rule_value(repo, ghlintrc, rule):
 
     return value
 
+def print_repo(repo):
+    repo_type = "private" if repo.private else "public"
+    print("{}{}  {}".format(
+        colored("https://github.com/", "white", attrs=["underline", "bold"]),
+        colored(repo.full_name, "white", attrs=["underline", "bold"]),
+        colored(repo_type, "white", attrs=["dark"])
+    ))
+
 def print_message(rule, severity, message):
+    global ERROR_COUNT, WARN_COUNT # pylint: disable=global-statement
+
     if severity == "error":
+        ERROR_COUNT += 1
         severity_color = "red"
     elif severity == "warn":
+        WARN_COUNT += 1
         severity_color = "yellow"
     else: # severity == "info"
         severity_color = "white"
@@ -67,6 +85,25 @@ def print_message(rule, severity, message):
         colored(message, "white"),
         colored(rule, "white", attrs=["dark"])
     ))
+
+def print_summary():
+    problem_count = ERROR_COUNT + WARN_COUNT
+    if problem_count > 0:
+        summary_color = "red" if ERROR_COUNT > 0 else "yellow"
+
+        problem_word = "problem" if problem_count == 1 else "problems"
+        error_word = "error" if ERROR_COUNT == 1 else "errors"
+        warn_word = "warning" if WARN_COUNT == 1 else "warnings"
+
+        cprint("✖ {problem_count} {problem_word} ({error_count} {error_word}, {warn_count} {warn_word})\n".format(
+            problem_count=problem_count,
+            problem_word=problem_word,
+            error_count=ERROR_COUNT,
+            error_word=error_word,
+            warn_count=WARN_COUNT,
+            warn_word=warn_word), summary_color)
+    else:
+        cprint("✓ 0 problems\n", "green")
 
 def rule_gitignore(repo, ghlintrc, rule):
     severity = get_rule_value(repo, ghlintrc, rule)
