@@ -1,7 +1,7 @@
 from __future__ import print_function
 from datetime import datetime
 import config
-from termcolor import cprint
+from termcolor import colored, cprint
 from github.GithubException import UnknownObjectException
 
 
@@ -19,10 +19,11 @@ def lint(repo):
             except UnknownObjectException:
                 ghlintrc = config.default()
 
-            if repo.private:
-                print("{} [Private]".format(repo.full_name))
-            else:
-                print(repo.full_name)
+            repo_type = "private" if repo.private else "public"
+            print(
+                colored(repo.full_name, 'white', attrs=['underline']),
+                colored(repo_type, 'white', attrs=['dark'])
+            )
 
             rule_gitignore(repo, ghlintrc)
             rule_contributing(repo, ghlintrc)
