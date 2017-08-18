@@ -1,9 +1,11 @@
 import click
+from . import config
 
 
 @click.command()
 def main():
-    click.echo("hello cli")
+    settings = config.settings()
+    click.echo("hello cli {}".format(settings))
     return
 
 
