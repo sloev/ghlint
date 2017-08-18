@@ -1,20 +1,39 @@
+import sys
+
 from setuptools import setup, find_packages
 
 
-with open('README.rst') as f:
-    README = f.read()
+PACKAGE_NAME = 'ghlint'
+PACKAGE_VERSION = '0.2.0'
+MINIMUM_PYTHON_VERSION = '2.7'
 
-with open('LICENSE') as f:
-    LICENSE = f.read()
+
+def check_python_version():
+    """Exit when the Python version is too low."""
+    if sys.version < MINIMUM_PYTHON_VERSION:
+        sys.exit("Python {0}+ is required.".format(MINIMUM_PYTHON_VERSION))
+
+
+def build_description():
+    """Build a description for the project from the README file."""
+    return open("README.rst").read()
+
+
+check_python_version()
 
 setup(
-    name='ghlint',
-    version='0.1.0',
+    name=PACKAGE_NAME,
+    version=PACKAGE_VERSION,
     description='Linting utility for GitHub',
-    long_description=README,
+    long_description=build_description(),
     author='Martin Buberl',
     author_email='hello@martinbuberl.com',
     url='https://github.com/martinbuberl/ghlint',
-    license=LICENSE,
-    packages=find_packages(exclude=('tests'))
+    license='MIT',
+    packages=find_packages(exclude=('tests')),
+    entry_points={
+        'console_scripts': [
+            'ghlint=ghlint.cli:main'
+        ]
+    }
 )
