@@ -12,9 +12,6 @@ WARN_COUNT = 0
 
 def lint(repo):
     global ERROR_COUNT, WARN_COUNT # pylint: disable=global-statement
-    # this is for debugging only
-    #if repo.name != "ghlint-foobar" and repo.name != "bootstrap":
-    #    return
 
     branches = repo.get_branches()
     for branch in branches:
