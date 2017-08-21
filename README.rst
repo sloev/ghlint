@@ -26,7 +26,14 @@ Run
 .. code-block:: sh
 
     pip install -r requirements.txt
-    python ghlint/main.py
+    python ghlint
+
+or
+
+.. code-block:: sh
+
+    pip install .
+    ghlint
 
 Tooling
 -------
