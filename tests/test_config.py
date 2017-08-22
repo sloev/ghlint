@@ -1,3 +1,4 @@
+# encoding=utf8
 import os
 import unittest
 from ghlint import config

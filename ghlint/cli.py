@@ -1,3 +1,4 @@
+# encoding=utf8
 import sys
 from inspect import getsourcefile
 from os import path
