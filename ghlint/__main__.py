@@ -1,11 +1,5 @@
-try:
-    from . import config
-except (ValueError, ImportError):
-    import config
-try:
-    from . import lint
-except (ValueError, ImportError):
-    import lint
+from ghlint import config
+from ghlint import lint
 
 
 def main():

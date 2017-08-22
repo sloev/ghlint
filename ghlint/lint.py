@@ -1,13 +1,10 @@
 # encoding=utf8
 from __future__ import print_function
 from datetime import datetime
+from ghlint import config
 from github import Github
 from github.GithubException import UnknownObjectException
 from termcolor import colored, cprint
-try:
-    from . import config
-except (ValueError, ImportError):
-    import config
 
 
 ERROR_COUNT = 0
