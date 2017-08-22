@@ -1,12 +1,12 @@
 import click
-from ghlint import run
 from . import config
+from . import lint
 
 
 @click.command()
 def main():
     settings = config.settings()
-    run(settings)
+    lint.run(settings)
     return
 
 if __name__ == '__main__':

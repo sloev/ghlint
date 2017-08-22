@@ -11,6 +11,7 @@ except ImportError:
 
 GHLINTRC = ".ghlintrc"
 
+
 def ghlintrc_path():
     path = None
 
