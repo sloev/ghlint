@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 PACKAGE_NAME = 'ghlint'
-PACKAGE_VERSION = '0.2.1'
+PACKAGE_VERSION = '0.2.2'
 MINIMUM_PYTHON_VERSION = '2.7'
 
 
