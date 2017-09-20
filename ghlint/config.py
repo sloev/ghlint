@@ -18,6 +18,8 @@ def ghlintrc_path():
 
     if os.path.exists(GHLINTRC):
         path = os.path.abspath(GHLINTRC)
+    elif os.path.exists(os.path.join(os.environ["HOME"], GHLINTRC)):
+        path = os.path.abspath(os.path.join(os.environ["HOME"], GHLINTRC))
 
     return path
 
