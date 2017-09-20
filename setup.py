@@ -31,10 +31,11 @@ setup(
     url='https://github.com/martinbuberl/ghlint',
     license='MIT',
     packages=find_packages(exclude=('tests')),
+    include_package_data=True,
+    data_files=[('ghlint', ['.ghlintrc'])],
     entry_points={
         'console_scripts': [
             'ghlint=ghlint.cli:main'
         ]
-    },
-    include_package_data=True
+    }
 )
